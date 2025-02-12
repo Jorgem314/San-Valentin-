@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es"> <!-- Changed to 'es' for Spanish -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Will you be my Valentine?">
     <title>Will You Be My Valentine?</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap">
     <link rel="stylesheet" href="style.css"> <!-- Link to external stylesheet -->
 </head>
 <body>
     <div id="container">
-        <div id="image-container"></div> <!-- Container for displaying images -->
+        <div id="image-container">
+            <!-- Add an image here or dynamically insert it using JavaScript -->
+        </div>
         <div id="text-container">
-            <div id="question">¿Te gustaria ser mi San Valentín?</div> <!-- Question -->
+            <h1 id="question">¿Te gustaría ser mi San Valentín?</h1> <!-- Changed to h1 for better semantics -->
             <div id="options">
-                <button id="yes-button" onclick="selectOption('yes')">Yes</button> <!-- Yes button -->
-                <button id="no-button" onclick="selectOption('no')">No</button> <!-- No button -->
+                <button id="yes-button" onclick="selectOption('yes')" aria-label="Yes">Sí</button> <!-- Added aria-label -->
+                <button id="no-button" onclick="selectOption('no')" aria-label="No">No</button> <!-- Added aria-label -->
             </div>
         </div>
     </div>
