@@ -16,19 +16,14 @@ const noMessages = [
 function selectOption(option) {
     if (option === 'si') {
         flashRainbowColors(function() {
-            document.getElementById('question').style.display = 'none';
-            displayCatHeart();
+            showLoveMessage(); // Muestra el mensaje y el gato en grande
         });
     } else if (option === 'no') {
-        // Cambia el texto del botón "No" en orden
         if (noClickCount < noMessages.length) {
             document.getElementById('no-button').innerText = noMessages[noClickCount];
             noClickCount++; 
-        } 
-        
-        // Si llega al último mensaje, oculta los botones
-        if (noClickCount === noMessages.length) {
-            document.getElementById('options').style.display = 'none';
+        } else {
+            document.getElementById('no-button').innerText = noMessages[noMessages.length - 1]; 
         }
 
         // Aumenta el tamaño del botón "Sí" en cada intento
@@ -46,14 +41,14 @@ function flashRainbowColors(callback) {
     var interval = setInterval(function() {
         document.body.style.backgroundColor = colors[i];
         i = (i + 1) % colors.length;
-    }, 200); // Change color every 200 milliseconds
+    }, 200); 
     setTimeout(function() {
         clearInterval(interval);
-        document.body.style.backgroundColor = ''; // Reset background color
+        document.body.style.backgroundColor = ''; 
         if (callback) {
             callback();
         }
-    }, 2000); // Flash colors for 2 seconds
+    }, 2000);
 }
 
 // Function to display the cat.gif initially
@@ -67,20 +62,29 @@ function displayCat() {
     };
 }
 
-// Function to display the cat-heart.gif
-function displayCatHeart() {
-    document.getElementById('image-container').innerHTML = '';
+// Function to display the final love message and the big cat-heart gif
+function showLoveMessage() {
+    // Oculta la pregunta y botones
+    document.getElementById('question').style.display = 'none';
+    document.getElementById('options').style.display = 'none';
+
+    // Muestra el mensaje
+    var textContainer = document.getElementById('text-container');
+    textContainer.innerHTML = '<h1 id="love-message">¡Sabía que dirías que sí! Te amo mucho ❤️</h1>';
+
+    // Muestra el gato grande
     var imageContainer = document.getElementById('image-container');
+    imageContainer.innerHTML = '';
     var catHeartImage = new Image();
-    catHeartImage.src = 'cat-heart.gif';
+    catHeartImage.src = 'cat-heart.gif'; 
     catHeartImage.alt = 'Cat Heart';
-    catHeartImage.style.width = '1000px'; // Ajusta el tamaño del GIF
+    catHeartImage.style.width = '1000px'; 
     catHeartImage.style.height = 'auto';
     catHeartImage.onload = function() {
         imageContainer.appendChild(catHeartImage);
-        document.getElementById('options').style.display = 'none';
     };
 }
 
 // Display the cat.gif initially
 displayCat();
+
