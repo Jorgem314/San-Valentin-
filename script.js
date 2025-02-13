@@ -1,25 +1,41 @@
 // script.js
 
+// Contador para el botón "No"
+let noClickCount = 0;
+
+// Mensajes en orden para el botón "No"
+const noMessages = [
+    "¿estás segura?", 
+    "¿de verdad no quieres? :(", 
+    "¡Estamos pololeando!", 
+    "Que triste :(", 
+    "¡no me importa!, di que sí >:("
+];
+
 // Function to handle button click events
 function selectOption(option) {
-    // Check which option was clicked
     if (option === 'si') {
-        // Flash rainbow colors
         flashRainbowColors(function() {
-            document.getElementById('question').style.display = 'none'; // Hide the question
-            displayCatHeart(); // Display the cat-heart.gif
+            document.getElementById('question').style.display = 'none';
+            displayCatHeart();
         });
     } else if (option === 'no') {
-        // Change text on the "No" button to "¿estás segura?"
-        document.getElementById('no-button').innerText = '¿estás segura?'; 
-        // Increase font size of "Yes" button
-        var siButton = document.getElementById('si-button');
-        var currentFontSize = window.getComputedStyle(siButton).getPropertyValue('font-size');
-        var newSize = parseFloat(currentFontSize) * 2; // Increase font size by  * 2px
+        // Cambia el texto del botón "No" en orden
+        if (noClickCount < noMessages.length) {
+            document.getElementById('no-button').innerText = noMessages[noClickCount];
+            noClickCount++; 
+        } 
+        
+        // Si llega al último mensaje, oculta los botones
+        if (noClickCount === noMessages.length) {
+            document.getElementById('options').style.display = 'none';
+        }
+
+        // Aumenta el tamaño del botón "Sí" en cada intento
+        let siButton = document.getElementById('si-button');
+        let currentFontSize = window.getComputedStyle(siButton).getPropertyValue('font-size');
+        let newSize = parseFloat(currentFontSize) * 1.5; // Aumenta el tamaño en 50%
         siButton.style.fontSize = newSize + 'px';
-    } else {
-        // If neither "Yes" nor "No" was clicked, show an alert message
-        alert('Invalid option!');
     }
 }
 
@@ -42,15 +58,10 @@ function flashRainbowColors(callback) {
 
 // Function to display the cat.gif initially
 function displayCat() {
-    // Get the container where the image will be displayed
     var imageContainer = document.getElementById('image-container');
-    // Create a new Image element for the cat
     var catImage = new Image();
-    // Set the source (file path) for the cat image
-    catImage.src = 'cat.gif'; // Assuming the cat image is named "cat.gif"
-    // Set alternative text for the image (for accessibility)
+    catImage.src = 'cat.gif';
     catImage.alt = 'Cat';
-    // When the cat image is fully loaded, add it to the image container
     catImage.onload = function() {
         imageContainer.appendChild(catImage);
     };
@@ -58,20 +69,15 @@ function displayCat() {
 
 // Function to display the cat-heart.gif
 function displayCatHeart() {
-    // Clear existing content in the image container
     document.getElementById('image-container').innerHTML = '';
-    // Get the container where the image will be displayed
     var imageContainer = document.getElementById('image-container');
-    // Create a new Image element for the cat-heart
     var catHeartImage = new Image();
-    // Set the source (file path) for the cat-heart image
-    catHeartImage.src = 'cat-heart.gif'; // Assuming the cat-heart image is named "cat-heart.gif"
-    // Set alternative text for the image (for accessibility)
+    catHeartImage.src = 'cat-heart.gif';
     catHeartImage.alt = 'Cat Heart';
-    // When the cat-heart image is fully loaded, add it to the image container
+    catHeartImage.style.width = '1000px'; // Ajusta el tamaño del GIF
+    catHeartImage.style.height = 'auto';
     catHeartImage.onload = function() {
         imageContainer.appendChild(catHeartImage);
-        // Hide the options container
         document.getElementById('options').style.display = 'none';
     };
 }
