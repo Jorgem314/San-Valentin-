@@ -19,6 +19,7 @@ function selectOption(option) {
             showLoveMessage(); // Muestra el mensaje y el gato en grande
         });
     } else if (option === 'no') {
+        // Cambia el texto del botón "No" en orden
         if (noClickCount < noMessages.length) {
             document.getElementById('no-button').innerText = noMessages[noClickCount];
             noClickCount++; 
@@ -78,7 +79,7 @@ function showLoveMessage() {
     var catHeartImage = new Image();
     catHeartImage.src = 'cat-heart.gif'; 
     catHeartImage.alt = 'Cat Heart';
-    catHeartImage.style.width = '1000px'; 
+    catHeartImage.style.width = '400px'; 
     catHeartImage.style.height = 'auto';
     catHeartImage.onload = function() {
         imageContainer.appendChild(catHeartImage);
@@ -87,4 +88,3 @@ function showLoveMessage() {
 
 // Display the cat.gif initially
 displayCat();
-
